@@ -12,6 +12,7 @@ namespace ApexFuelApplication.Models
         public string card_id { get; set; }
         [DataMember(Order = 2)]
         public string owner_name { get; set; }
+        
         [DataMember(Order = 3)]
         public DateTime crtime { get; set; }
         [DataMember(Order = 4)]
