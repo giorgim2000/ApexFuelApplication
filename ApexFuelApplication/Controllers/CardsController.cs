@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApexFuelApplication.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,15 @@ namespace ApexFuelApplication.Controllers
 {
     public class CardsController : Controller
     {
-        private readonly HttpClient client;
-        public CardsController()
+        private readonly CardServices _service;
+        public CardsController(CardServices service)
         {
-            
+            _service = service;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var cards = await _service.GetCardsByCompany();
+            return View(cards);
         }
     }
 }

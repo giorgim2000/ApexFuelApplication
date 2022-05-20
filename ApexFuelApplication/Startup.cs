@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ApexFuelApplication.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,7 @@ namespace ApexFuelApplication
                 .AddControllersWithViews()
                 .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(Configuration.GetSection("Url").Value) });
+            services.AddScoped<CardServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
