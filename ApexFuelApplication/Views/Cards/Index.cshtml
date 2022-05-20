@@ -1,0 +1,19 @@
+﻿@attribute [Authorize]
+@model GetCardsByCompanyResponseModel
+
+
+@(Html.DevExtreme().DataGrid<ApexFuelApplication.Models.CardsByCompany>().DataSource(i=>i.Mvc()).AllowColumnResizing(false)
+    .DataSource(ds => ds.Mvc()
+        .Controller("Cards")
+        .LoadAction("Get")
+    )
+    .RemoteOperations(true)
+    .Columns(columns => {
+
+        columns.AddFor(m => m.rcount);
+
+        columns.AddFor(m => m.code);
+
+        columns.AddFor(m => m.fuelname);
+    })
+)
