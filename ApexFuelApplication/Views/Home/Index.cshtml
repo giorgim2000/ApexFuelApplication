@@ -1,21 +1,43 @@
 ﻿@using ApexFuelApplication.Models
 
-<h2>Home</h2>
-
-@(Html.DevExtreme().DataGrid<CardsByCompany>()
-    .ShowBorders(true)
-    .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("card_id"))
-    .Columns(columns => {
-        columns.AddFor(m => m.code).Caption("საწვავის კოდი");
-        columns.AddFor(m => m.fuelname).Caption("საწვავის დასახელება").GroupIndex(0);
-        columns.AddFor(m => m.rcount).Caption("ნაშთი");
-    })
-    .Selection(p => p.Mode(SelectionMode.Single))
-    .Paging(p => p.PageSize(50))
-    .FilterRow(f => f.Visible(true))
-    .HeaderFilter(f => f.Visible(true))
-    .GroupPanel(p => p.Visible(true))
-    .Grouping(g => { g.ContextMenuEnabled(true); g.ExpandMode(GridGroupingExpandMode.RowClick); g.AllowCollapsing(true); })
-    .RemoteOperations(true)
-
-)
+<div class="au-div">
+    <form method="post" class="au-form">
+        <div class="loginHeaderDiv">
+            <h2 style="color: #c4151c; font-weight: bolder;">Apex | Fuel</h2>
+        </div>
+        <div class="loginHeaderDiv" style="align-items:flex-start;">
+            <p style="color: #007dc5; font-weight: bolder;">Log In</p>
+        </div>
+        <div class="dx-row-lines">
+            @(Html.DevExtreme()
+                .TextBox()
+                .Label("Username")
+                .Placeholder("Enter Your Username")
+                .Mode( TextBoxMode.Text)
+                .Width("100%")
+                .ShowClearButton(true)
+                )
+        </div>
+        <div class="dx-row-lines">
+            @(Html.DevExtreme()
+            .TextBox()
+            .Label("Password")
+            .Placeholder("Enter Your Password")
+            .Mode( TextBoxMode.Password)
+            .HoverStateEnabled(true)
+            .Width("100%")
+            .ShowClearButton(true)
+            )
+        </div>
+        @*<button class="dx-button" type="submit">Log In</button>*@
+        <div class="dx-row-lines">
+            @(Html.DevExtreme()
+           .Button()
+           .Text("Sign In")
+           .StylingMode(ButtonStylingMode.Text)
+           .Width("100%")
+           .ID("submitButton")
+           )
+        </div>
+    </form>
+</div>

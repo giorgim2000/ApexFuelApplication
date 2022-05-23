@@ -1,17 +1,25 @@
 ﻿@*@attribute [Authorize]*@
-@model GetCardsByCompanyResponseModel
+@model List<CardsModels.CardDto>
 
-
-@(Html.DevExtreme().DataGrid<ApexFuelApplication.Models.CardsByCompany>().DataSource(Model.Result)
-    .AllowColumnResizing(false)
-    )
+@(Html.DevExtreme().DataGrid<ApexFuelApplication.Models.CardsModels.CardDto>().DataSource(Model, "CardId")
+    .ID("gridContainer")
     .RemoteOperations(true)
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .FocusStateEnabled(true)
+    .HoverStateEnabled(true)
+    .ShowColumnLines(true)
+    .ShowRowLines(true)
     .Columns(columns => {
 
-        columns.AddFor(m => m.rcount);
+        columns.AddFor(m => m.CardName).CssClass("namecol").Caption("დასახელება").GroupIndex(0);
 
-        columns.AddFor(m => m.code);
+        columns.AddFor(m => m.code).Caption("საწვავის კოდი");
 
-        columns.AddFor(m => m.fuelname);
+        columns.AddFor(m => m.fuelname).Caption("საწვავის დასახელება");
+        columns.AddFor(m => m.rcount).Caption("ნაშთი");
+        
     })
+    .ShowBorders(true)
+    
 )

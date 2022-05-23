@@ -1,4 +1,5 @@
-﻿using ApexFuelApplication.Services;
+﻿using ApexFuelApplication.Models.CardsModels;
+using ApexFuelApplication.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
@@ -18,7 +19,16 @@ namespace ApexFuelApplication.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var cards = await _service.GetCardsByCompany();
+            var data = await _service.GetCardsByCompany();
+            var cards = data.Result.Select(i => new CardDto()
+            {
+                CardId = i.card_id,
+                IsBasic = i.isbasic,
+                OwnerName = i.owner_name,
+                code = i.code,
+                fuelname = i.fuelname,
+                rcount = i.rcount
+            }).ToList();
             return View(cards);
         }
     }
